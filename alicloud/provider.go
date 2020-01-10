@@ -433,6 +433,7 @@ func Provider() terraform.ResourceProvider {
 			"alicloud_polardb_account_privilege":           resourceAlicloudPolarDBAccountPrivilege(),
 			"alicloud_polardb_endpoint_address":            resourceAlicloudPolarDBEndpointAddress(),
 			"alicloud_hbase_instance":                      resourceAlicloudHBaseInstance(),
+			"alicloud_acm_configuration":					resourceAlicloudAcmConfiguration(),
 		},
 
 		ConfigureFunc: providerConfigure,
