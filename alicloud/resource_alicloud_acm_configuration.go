@@ -3,6 +3,7 @@ package alicloud
 import (
 	"errors"
 	"fmt"
+	"log"
 
 	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/helper/validation"
@@ -47,6 +48,7 @@ func resourceAlicloudAcmConfiguration() *schema.Resource {
 }
 
 func resourceAlicloudAcmConfigurationCreate(d *schema.ResourceData, meta interface{}) error {
+	log.Println("!!!!!!!!!!!!!!CREATE")
 
 	client := meta.(*connectivity.AliyunClient)
 	tenant := d.Get("namespace").(string)
@@ -65,10 +67,14 @@ func resourceAlicloudAcmConfigurationCreate(d *schema.ResourceData, meta interfa
 
 	d.SetId(fmt.Sprintf("%s-%s-%s", tenant, group, dataID))
 
+	log.Println("!!!!!!!!!!!!!!")
+	log.Println(fmt.Sprintf("%s-%s-%s", tenant, group, dataID))
+
 	return resourceAlicloudAcmConfigurationUpdate(d, meta)
 }
 
 func resourceAlicloudAcmConfigurationUpdate(d *schema.ResourceData, meta interface{}) error {
+	log.Println("!!!!!!!!!!!!!!UPDATE")
 
 	if d.HasChange("content") {
 		client := meta.(*connectivity.AliyunClient)
@@ -89,6 +95,8 @@ func resourceAlicloudAcmConfigurationUpdate(d *schema.ResourceData, meta interfa
 }
 
 func resourceAlicloudAcmConfigurationRead(d *schema.ResourceData, meta interface{}) error {
+	log.Println("!!!!!!!!!!!!!!READ")
+
 	client := meta.(*connectivity.AliyunClient)
 	tenant := d.Get("namespace").(string)
 	dataID := d.Get("data_id").(string)
@@ -110,6 +118,8 @@ func resourceAlicloudAcmConfigurationRead(d *schema.ResourceData, meta interface
 }
 
 func resourceAlicloudAcmConfigurationDelete(d *schema.ResourceData, meta interface{}) error {
+	log.Println("!!!!!!!!!!!!!!DELETE")
+
 	client := meta.(*connectivity.AliyunClient)
 	tenant := d.Get("namespace").(string)
 	dataID := d.Get("data_id").(string)
